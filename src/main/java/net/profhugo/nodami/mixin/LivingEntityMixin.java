@@ -24,6 +24,7 @@ public class LivingEntityMixin {
 		}
 	}
 
+	/*
 	@Inject(at = @At("HEAD"), method = "takeKnockback", cancellable = true)
 	private void onTakingKnockback(final Entity source, float amp, double dx, double dz, CallbackInfo info) {
 		ActionResult result = EntityKnockbackCallback.EVENT.invoker().takeKnockback((LivingEntity) (Object) this,
@@ -33,4 +34,5 @@ public class LivingEntityMixin {
 		}
 
 	}
+	*/
 }

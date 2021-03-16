@@ -18,7 +18,7 @@ public class NoDamI implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		System.out.println("NoDamI v0.2 for Minecraft 1.14.4 Fabric Edition is starting.");
+		System.out.println("NoDamI v0.3 for Minecraft 1.16.5 Fabric Edition is starting.");
 		NodamiConfig.preInit();
 		registerHandlers();
 		System.out.println("NoDamI: Loading completed. This mod is powered by FabricMC and SnakeYAML");
@@ -43,7 +43,7 @@ public class NoDamI implements ModInitializer {
 				}
 				String message = String.format("Type of damage received: %s\nAmount: %.3f\nTrue Source (mob id): %s\n",
 						source.getName(), amount, debugSource);
-				entity.sendMessage(new LiteralText(message));
+				((PlayerEntity) entity).sendMessage(new LiteralText(message), false);
 
 			}
 			if (NodamiConfig.excludePlayers && entity instanceof PlayerEntity) {
@@ -122,7 +122,7 @@ public class NoDamI implements ModInitializer {
 			if (NodamiConfig.debugMode) {
 				String message = String.format("Entity attacked: %s",
 						EntityType.getId(target.getType()));
-				player.sendMessage(new LiteralText(message));
+				player.sendMessage(new LiteralText(message), false);
 			}
 			
 			float str = player.getAttackCooldownProgress(0);
