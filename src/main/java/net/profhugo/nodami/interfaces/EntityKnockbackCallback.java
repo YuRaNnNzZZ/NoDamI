@@ -8,9 +8,9 @@ import net.minecraft.util.ActionResult;
 
 public interface EntityKnockbackCallback {
 	Event<EntityKnockbackCallback> EVENT = EventFactory.createArrayBacked(EntityKnockbackCallback.class,
-			(listeners) -> (entity, source, amp, dx, dz) -> {
+			(listeners) -> (entity, amp, dx, dz) -> {
 				for (EntityKnockbackCallback event : listeners) {
-					ActionResult result = event.takeKnockback(entity, source, amp, dx, dz);
+					ActionResult result = event.takeKnockback(entity, amp, dx, dz);
 					if (result != ActionResult.PASS) {
 						return result;
 					}
@@ -19,5 +19,5 @@ public interface EntityKnockbackCallback {
 				return ActionResult.PASS;
 			});
 
-	ActionResult takeKnockback(LivingEntity entity, Entity source, float amp, double dx, double dz);
+	ActionResult takeKnockback(LivingEntity entity, float amp, double dx, double dz);
 }

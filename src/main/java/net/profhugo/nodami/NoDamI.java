@@ -3,6 +3,7 @@ package net.profhugo.nodami;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.ActionResult;
@@ -99,17 +100,16 @@ public class NoDamI implements ModInitializer {
 		});
 
 		// Knockback module part 1
-		EntityKnockbackCallback.EVENT.register((entity, source, amp, dx, dz) -> {
+		EntityKnockbackCallback.EVENT.register((entity, amp, dx, dz) -> {
 			if (entity.getEntityWorld().isClient) {
 				return ActionResult.PASS;
 			}
-			if (source != null) {
-				// IT'S ONLY MAGIC
-				if (source instanceof PlayerEntity && ((PlayerEntity) source).hurtTime == -1) {
-					((PlayerEntity) source).hurtTime = 0;
-					return ActionResult.FAIL;
-				}
+
+			if (entity.handSwinging) {
+				entity.handSwinging = false;
+				return ActionResult.FAIL;
 			}
+
 			return ActionResult.PASS;
 		});
 
@@ -131,7 +131,7 @@ public class NoDamI implements ModInitializer {
 			}
 			if (str <= NodamiConfig.knockbackCancelThreshold) {
 				// Don't worry, it's only magic
-				player.hurtTime = -1;
+				((LivingEntity) target).handSwinging = true;
 			}
 
 			return ActionResult.PASS;

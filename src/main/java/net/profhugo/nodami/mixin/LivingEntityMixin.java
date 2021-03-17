@@ -24,15 +24,13 @@ public class LivingEntityMixin {
 		}
 	}
 
-	/*
 	@Inject(at = @At("HEAD"), method = "takeKnockback", cancellable = true)
-	private void onTakingKnockback(final Entity source, float amp, double dx, double dz, CallbackInfo info) {
+	private void onTakingKnockback(float amp, double dx, double dz, CallbackInfo info) {
 		ActionResult result = EntityKnockbackCallback.EVENT.invoker().takeKnockback((LivingEntity) (Object) this,
-				source, amp, dx, dz);
+				amp, dx, dz);
 		if (result == ActionResult.FAIL) {
 			info.cancel();
 		}
 
 	}
-	*/
 }
